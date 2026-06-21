@@ -25,48 +25,19 @@
         }
 
         /* --- BACKGROUND FLOATING DECORATIONS --- */
-        /* --- BACKGROUND FLOATING DECORATIONS --- */
         .decor {
             position: absolute;
             pointer-events: none;
-            opacity: 0.85; /* Makes them clear and beautiful */
+            opacity: 0.85;
             animation: floatUpDown 5s ease-in-out infinite;
-            
-            /* CRITICAL FIX: This removes the white backgrounds from your JPGs/PNGs */
             mix-blend-mode: multiply; 
             background: transparent !important;
         }
 
-        /* Top Left Corner - Moved safely outside the title text */
-        #decor-1 { 
-            top: 5%; 
-            left: 4%; 
-            width: 75px; 
-        }
-
-        /* Top Right Corner - Moved out of the way of the title text */
-        #decor-2 { 
-            top: 8%; 
-            right: 4%; 
-            width: 85px; 
-            animation-delay: 1.5s; 
-        }
-
-        /* Bottom Left Corner - Positioned away from the tap prompt */
-        #decor-3 { 
-            bottom: 6%; 
-            left: 4%; 
-            width: 70px; 
-            animation-delay: 3s; 
-        }
-
-        /* Bottom Right Corner - Positioned away from the tap prompt */
-        #decor-4 { 
-            bottom: 5%; 
-            right: 4%; 
-            width: 80px; 
-            animation-delay: 2.2s; 
-        }
+        #decor-1 { top: 5%; left: 4%; width: 75px; }
+        #decor-2 { top: 8%; right: 4%; width: 85px; animation-delay: 1.5s; }
+        #decor-3 { bottom: 6%; left: 4%; width: 70px; animation-delay: 3s; }
+        #decor-4 { bottom: 5%; right: 4%; width: 80px; animation-delay: 2.2s; }
         
         @keyframes floatUpDown {
             0%, 100% { transform: translateY(0) scale(1); }
@@ -94,13 +65,12 @@
             align-items: center;
             animation: fadeIn 0.8s ease;
             width: 100%;
-            /* Ensures centered content stays strictly bounded inside phone */
             padding: 0 10px; 
         }
 
         h1 {
             color: #ec4899;
-            font-size: 2.6rem; /* Marginally scaled down to prevent text-crowding on small displays */
+            font-size: 2.6rem;
             line-height: 1.2;
             margin-bottom: 10px;
             font-weight: 800;
@@ -120,6 +90,41 @@
             margin-bottom: 30px;
         }
 
+        /* --- GIFT BOX ROW & SIDE EMOJIS --- */
+        .gift-row-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .side-emoji {
+            font-size: 2rem;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .left-emoji {
+            animation: floatLeftEmoji 1.5s infinite ease-in-out alternate;
+        }
+
+        .right-emoji {
+            animation: floatRightEmoji 1.5s infinite ease-in-out alternate;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes floatLeftEmoji {
+            0% { transform: translateY(0) rotate(-10deg) scale(1); }
+            100% { transform: translateY(-10px) rotate(5deg) scale(0.5); }
+        }
+
+        @keyframes floatRightEmoji {
+            0% { transform: translateY(0) rotate(10deg) scale(1); }
+            100% { transform: translateY(-10px) rotate(-5deg) scale(0.5); }
+        }
+
         /* Gift Box 3D Wrapper */
         .gift-wrapper {
             position: relative;
@@ -133,7 +138,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* CRITICAL FIX: Removes the white square background around your gift box */
             mix-blend-mode: multiply; 
             background: transparent !important;
         }
@@ -155,82 +159,28 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- SCREEN 2: STORY TIMELINE --- */
-        #story-screen {
-            display: none; /* Triggered on click */
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
+        /* The "Pop" animation triggered on click */
+        .pop-effect {
+            animation: giftPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards !important;
         }
 
-        .slide {
-            display: none;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            animation: slideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        .slide.active { display: flex; }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(40px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes giftPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4) rotate(-10deg); }
+            100% { transform: scale(0) rotate(10deg); opacity: 0; }
         }
 
-        /* Beautiful Rounded Display for Photos */
-        .photo-frame {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            border-radius: 24px;
-            background: white;
-            padding: 10px;
-            box-shadow: 0 20px 40px rgba(236,72,153,0.15);
-            margin-bottom: 25px;
+        /* Makes the side emojis fly away when the box pops */
+        .emoji-fly-left {
+            transition: all 0.4s ease-out;
+            transform: translateX(-150px) scale(0) rotate(-45deg);
+            opacity: 0;
         }
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 16px;
+        .emoji-fly-right {
+            transition: all 0.4s ease-out;
+            transform: translateX(150px) scale(0) rotate(45deg);
+            opacity: 0;
         }
-
-        /* Universal Action Button */
-        .action-btn {
-            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
-            color: white;
-            border: none;
-            padding: 14px 35px;
-            font-size: 1.05rem;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(219,39,119,0.3);
-            transition: all 0.2s ease;
-        }
-        .action-btn:active { transform: scale(0.95); }
-
-        /* --- FINAL SLIDE CONTENT --- */
-        .teddy-icon {
-            font-size: 4.5rem;
-            margin-bottom: 10px;
-            animation: heartPulse 1.4s infinite alternate;
-        }
-        @keyframes heartPulse {
-            to { transform: scale(1.15); }
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            color: #4c0519;
-            line-height: 1.6;
-            margin-top: 15px;
-            font-size: 1.05rem;
-            border: 1px solid #fce7f3;
-        }
-        .card h3 { color: #db2777; margin-bottom: 8px; }
 
         /* Confetti Overlay */
         #confetti {
@@ -254,66 +204,34 @@
             <h1>Happy Birthday,<br><span>Friend!</span> 🥰✨</h1>
             <p class="subtitle">I made a little something for you. ❤️</p>
             
-            <div class="gift-wrapper" onclick="openSurprise()">
-                <img src="giftcard.png" alt="🎁">
+            <div class="gift-row-container">
+                <span class="side-emoji left-emoji">💖</span>
+                
+                <div class="gift-wrapper" onclick="openSurprise()">
+                    <img src="giftcard.png" alt="🎁">
+                </div>
+                
+                <span class="side-emoji right-emoji">✨</span>
             </div>
             
             <p class="tap-prompt">(Tap to open me! 🧸✨)</p>
         </div>
-
-        <div id="story-screen">
-            
-            <div class="slide active">
-                <div class="photo-frame">
-                    <img src="photo1.jpg" alt="Memory 1">
-                </div>
-                <button class="action-btn" onclick="advanceSlide()">Next Memory 👉</button>
-            </div>
-
-            <div class="slide">
-                <div class="photo-frame">
-                    <img src="photo2.jpg" alt="Memory 2">
-                </div>
-                <button class="action-btn" onclick="advanceSlide()">Next Memory 👉</button>
-            </div>
-
-            <div class="slide">
-                <div class="teddy-icon">🧸❤️</div>
-                <div class="photo-frame">
-                    <img src="our-photo.jpg" alt="Us together">
-                </div>
-                <div class="card">
-                    <h3>My Birthday Wish For You...</h3>
-                    <p>Type your beautiful heartfelt wish or insider joke right here to wrap up the gift perfectly!</p>
-                </div>
-            </div>
-
-        </div>
     </div>
 
     <script>
-        let currentIdx = 0;
-        const slides = document.querySelectorAll('.slide');
-
         function openSurprise() {
-            // Play Audio safely
+            const giftWrapper = document.querySelector('.gift-wrapper');
+            const leftEmoji = document.querySelector('.left-emoji');
+            const rightEmoji = document.querySelector('.right-emoji');
             const audio = document.getElementById('bg-audio');
+
             audio.play().catch(() => console.log("Audio waiting for user clearance."));
+
+            giftWrapper.classList.add('pop-effect');
+            if(leftEmoji) leftEmoji.classList.add('emoji-fly-left');
+            if(rightEmoji) rightEmoji.classList.add('emoji-fly-right');
             
-            // Pop Confetti Explosion
             burstConfetti();
-
-            // Slide Screen Switch
-            document.getElementById('gift-screen').style.display = 'none';
-            document.getElementById('story-screen').style.display = 'flex';
-        }
-
-        function advanceSlide() {
-            slides[currentIdx].classList.remove('active');
-            currentIdx++;
-            if (currentIdx < slides.length) {
-                slides[currentIdx].classList.add('active');
-            }
         }
 
         // Engine behind full screen premium confetti explosion
