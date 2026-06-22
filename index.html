@@ -14,7 +14,8 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            background: linear-gradient(135deg, #fef2f2 0%, #ffe4e6 50%, #fce7f3 100%);
+            background: linear-gradient(45deg, #ffebec 0%, #ffe4e6 25%, #f5d0fe 50%, #fef08a 75%, #fce7f3 100%) !important;
+            background-size: 200% 200%;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -24,31 +25,11 @@
             position: relative;
         }
 
-        /* --- BACKGROUND FLOATING DECORATIONS --- */
-        .decor {
-            position: absolute;
-            pointer-events: none;
-            opacity: 0.85;
-            animation: floatUpDown 5s ease-in-out infinite;
-            mix-blend-mode: multiply; 
-            background: transparent !important;
-        }
-
-        #decor-1 { top: 5%; left: 4%; width: 75px; }
-        #decor-2 { top: 8%; right: 4%; width: 85px; animation-delay: 1.5s; }
-        #decor-3 { bottom: 6%; left: 4%; width: 70px; animation-delay: 3s; }
-        #decor-4 { bottom: 5%; right: 4%; width: 80px; animation-delay: 2.2s; }
-        
-        @keyframes floatUpDown {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-12px) scale(1.03); }
-        }
-
-        /* --- SCREEN CONTAINER --- */
+        /* --- GLOBAL LAYOUT CONTAINERS --- */
         .container {
             width: 100%;
             max-width: 420px;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
             z-index: 10;
             display: flex;
@@ -58,15 +39,22 @@
             position: relative;
         }
 
-        /* --- SCREEN 1: THE GIFT BOX --- */
-        #gift-screen {
-            display: flex;
+        /* Hidden by default, unmasked step by step */
+        .screen {
+            display: none;
             flex-direction: column;
             align-items: center;
-            animation: fadeIn 0.8s ease;
             width: 100%;
-            padding: 0 10px; 
+            animation: screenFadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
+
+        @keyframes screenFadeIn {
+            from { opacity: 0; transform: translateY(15px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* --- SCREEN 1: THE GIFT BOX --- */
+        #gift-screen { display: flex; } 
 
         h1 {
             color: #ec4899;
@@ -90,17 +78,15 @@
             margin-bottom: 30px;
         }
 
-        /* --- GIFT BOX ROW & SIDE EMOJIS --- */
         .gift-row-container {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
             margin: 15px 0;
-            position: relative;
         }
 
-        .side-emoji {
+         .side-emoji {
             font-size: 2rem;
             user-select: none;
             pointer-events: none;
@@ -125,116 +111,277 @@
             100% { transform: translateY(-10px) rotate(-5deg) scale(0.5); }
         }
 
-        /* Gift Box 3D Wrapper */
         .gift-wrapper {
             position: relative;
             width: 170px;
             height: 170px;
-            margin: 15px 0;
             cursor: pointer;
             animation: dynamicBox 1.2s infinite ease-in-out;
         }
-        .gift-wrapper img {
+        .gift-wrapper img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+
+        @keyframes dynamicBox {
+            0%, 100% { transform: translateY(0) scale(1); }
+            20% { transform: translateY(-12px) scale(1.05); }
+            40% { transform: translateY(0) scale(0.95); }
+        }
+
+        .tap-prompt { margin-top: 35px; font-size: 1rem; color: #ea580c; font-weight: bold; }
+
+        .pop-effect { animation: giftPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards !important; }
+        @keyframes giftPop {
+            50% { transform: scale(1.3); }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* --- BACKGROUND FLOATING DECORATIONS --- */
+        .decor-container {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .decor {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.85;
+            animation: floatUpDown 5s ease-in-out infinite;
             mix-blend-mode: multiply; 
             background: transparent !important;
         }
 
-        @keyframes dynamicBox {
-            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
-            20% { transform: translateY(-12px) scale(1.05) rotate(-5deg); }
-            40% { transform: translateY(0) scale(0.95) rotate(5deg); }
-            60% { transform: translateY(-6px) scale(1.02) rotate(-3deg); }
-            80% { transform: translateY(0) scale(0.98) rotate(3deg); }
+        #decor-1 { top: 5%; left: 4%; width: 75px; }
+        #decor-2 { top: 8%; right: 4%; width: 85px; animation-delay: 1.5s; }
+        #decor-3 { bottom: 6%; left: 4%; width: 70px; animation-delay: 3s; }
+        #decor-4 { bottom: 5%; right: 4%; width: 80px; animation-delay: 2.2s; }
+        
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.03); }
         }
 
-        /* Shrunk text animation underneath */
-        .tap-prompt {
-            margin-top: 35px;
-            font-size: 1rem;
-            color: #ea580c;
+        /* --- SCREEN 2: INTEGRATED PRODUCTION VIDEO PLAYER --- */
+        .video-wrapper {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background: transparent;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            background: transparent;
+        }
+
+        /* --- SCREEN 3: CAKE TRANSITION PLAYER --- */
+        .cake-box {
+            width: 220px;
+            height: 220px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .cake-box:active { transform: scale(0.95); }
+        .cake-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .blow-instruction {
+            font-size: 1.1rem;
+            color: #be185d;
             font-weight: bold;
+            margin-top: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        /* --- SCREEN 4: ROYAL MESSAGE CONTAINER --- */
+        .royal-card {
+            width: 100%;
+            /* Widened the card base bounding box slightly to accommodate transparent wings of the PNG */
+            max-width: 440px; 
+            background-image: url('scroll.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* Tighter internal side padding dynamically keeps the text away from scroll margins */
+            padding: 110px 75px 95px 75px; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .royal-card:active { transform: scale(0.98); }
+        
+        .royal-card h2 {
+            font-family: 'Georgia', serif;
+            color: #9d174d;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #b45309;
+            padding-bottom: 6px;
+        }
+        .royal-card p {
+            font-family: 'Georgia', serif;
+            color: #450a0a;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-style: italic;
+            font-weight: 600;
+        }
+        .hint-click {
+            margin-top: 15px;
+            font-size: 0.7rem;
+            color: #b45309;
+            font-weight: 800;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* The "Pop" animation triggered on click */
-        .pop-effect {
-            animation: giftPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards !important;
+        /* --- SCREEN 5: FINAL MEMORY FRAME --- */
+        .together-photo-frame {
+            width: 100%;
+            aspect-ratio: 1.1 / 1;
+            background: white;
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
         }
-
-        @keyframes giftPop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.4) rotate(-10deg); }
-            100% { transform: scale(0) rotate(10deg); opacity: 0; }
+        .together-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
         }
-
-        /* Makes the side emojis fly away when the box pops */
-        .emoji-fly-left {
-            transition: all 0.4s ease-out;
-            transform: translateX(-150px) scale(0) rotate(-45deg);
-            opacity: 0;
-        }
-        .emoji-fly-right {
-            transition: all 0.4s ease-out;
-            transform: translateX(150px) scale(0) rotate(45deg);
-            opacity: 0;
-        }
-
-        /* Confetti Overlay */
-        #confetti {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 999;
-        }
+        
+        #confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
     </style>
 </head>
 <body>
 
-    <audio id="bg-audio" src="music.mp3" loop></audio>
     <canvas id="confetti"></canvas>
 
-    <img src="heart1.jpg" id="decor-1" class="decor" alt="❤️">
-    <img src="balloon.png" id="decor-2" class="decor" alt="🎈">
-    <img src="balloon2.jpg" id="decor-3" class="decor" alt="🎈">
-    <img src="heart2.png" id="decor-4" class="decor" alt="❤️">
+    <div id="first-screen-decorations" class="decor-container">
+        <img src="heart1.png?v=1" id="decor-1" class="decor" alt="❤️">
+        <img src="balloon.png?v=1" id="decor-2" class="decor" alt="🎈">
+        <img src="balloon2.jpg?v=1" id="decor-3" class="decor" alt="🎈">
+        <img src="heart2.png?v=1" id="decor-4" class="decor" alt="❤️">
+    </div>
 
     <div class="container">
-        <div id="gift-screen">
+        
+        <div id="gift-screen" class="screen">
             <h1>Happy Birthday,<br><span>Friend!</span> 🥰✨</h1>
             <p class="subtitle">I made a little something for you. ❤️</p>
-            
             <div class="gift-row-container">
                 <span class="side-emoji left-emoji">💖</span>
-                
                 <div class="gift-wrapper" onclick="openSurprise()">
                     <img src="giftcard.png" alt="🎁">
                 </div>
-                
                 <span class="side-emoji right-emoji">✨</span>
             </div>
-            
             <p class="tap-prompt">(Tap to open me! 🧸✨)</p>
         </div>
+
+        <div id="video-screen" class="screen">
+            <div class="video-wrapper">
+                <video id="main-birthday-video" autoplay muted playsinline controls preload="auto">
+                    <source src="vams.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <div id="cake-screen" class="screen">
+            <div class="cake-box" onclick="triggerCakeBlow()">
+                <img id="cake-image-state" src="cake with candles.png" alt="Lit Birthday Cake">
+            </div>
+            <p class="blow-instruction" id="blow-hint">💨 Tap the candles to blow them out!</p>
+        </div>
+
+        <div id="message-screen" class="screen">
+            <div class="royal-card" onclick="revealFinalPhoto()">
+                <p>To a majestic companion, may your special day be filled with endless laughter, gold-standard memories, and the fulfillment of every heart's desire. Happy Birthday!</p>
+                <div class="hint-click">Tap message to open finale card 👉</div>
+            </div>
+        </div>
+
+        <div id="photo-screen" class="screen">
+            <div class="together-photo-frame">
+                <img src="our-photo.jpg" alt="Us Together ❤️">
+            </div>
+        </div>
+
     </div>
 
     <script>
+        const videoElement = document.getElementById('main-birthday-video');
+
+        videoElement.addEventListener('error', function(e) {
+            console.error("Video element errored out:", videoElement.error);
+        }, true);
+
         function openSurprise() {
             const giftWrapper = document.querySelector('.gift-wrapper');
-            const leftEmoji = document.querySelector('.left-emoji');
-            const rightEmoji = document.querySelector('.right-emoji');
-            const audio = document.getElementById('bg-audio');
-
-            audio.play().catch(() => console.log("Audio waiting for user clearance."));
 
             giftWrapper.classList.add('pop-effect');
-            if(leftEmoji) leftEmoji.classList.add('emoji-fly-left');
-            if(rightEmoji) rightEmoji.classList.add('emoji-fly-right');
-            
             burstConfetti();
+
+            setTimeout(() => {
+                document.getElementById('gift-screen').style.display = 'none';
+                document.getElementById('first-screen-decorations').style.display = 'none';
+                
+                document.getElementById('video-screen').style.display = 'flex';
+                
+                videoElement.load();
+                videoElement.currentTime = 0;
+                videoElement.muted = true;
+                
+                let playPromise = videoElement.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        setTimeout(() => { videoElement.muted = false; }, 150);
+                    }).catch(err => {
+                        console.warn("Autoplay blocked. Keeping video muted to force stream.", err);
+                        videoElement.muted = true;
+                        videoElement.play();
+                    });
+                }
+            }, 400); 
         }
 
-        // Engine behind full screen premium confetti explosion
+        videoElement.onended = function() {
+            document.getElementById('video-screen').style.display = 'none';
+            document.getElementById('cake-screen').style.display = 'flex';
+            burstConfetti();
+        };
+
+        function triggerCakeBlow() {
+            const cakeImage = document.getElementById('cake-image-state');
+            const blowHint = document.getElementById('blow-hint');
+
+            cakeImage.src = 'cake without candles.png';
+            blowHint.innerHTML = "✨ Your wish is cast! ✨";
+            
+            setTimeout(() => {
+                document.getElementById('cake-screen').style.display = 'none';
+                document.getElementById('message-screen').style.display = 'flex';
+            }, 1100);
+        }
+
+        function revealFinalPhoto() {
+            document.getElementById('message-screen').style.display = 'none';
+            document.getElementById('photo-screen').style.display = 'flex';
+            
+            burstConfetti();
+            setTimeout(burstConfetti, 300);
+        }
+
         function burstConfetti() {
             const canvas = document.getElementById('confetti');
             const ctx = canvas.getContext('2d');
