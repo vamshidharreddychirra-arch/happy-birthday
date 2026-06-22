@@ -282,7 +282,7 @@
         /* Scattered celebration assets */
         .party-asset {
             position: absolute;
-            font-size: 3.5rem;
+            font-size: 1.5rem;
             user-select: none;
             pointer-events: none;
             z-index: 12;
@@ -495,16 +495,15 @@
             // Symmetrical positioning grid avoiding the center cake region completely
             const assets = document.querySelectorAll('.party-asset');
             const positions = [
-                { top: 22, left: 14 },  // Top Left
-                { top: 22, left: 76 },  // Top Right
-                { top: 48, left: 12 },  // Mid Left
-                { top: 48, left: 78 },  // Mid Right
-                { top: 74, left: 14 },  // Bottom Left
-                { top: 74, left: 76 },  // Bottom Right
-                { top: 35, left: 16 },  // Inner Left
-                { top: 35, left: 74 }   // Inner Right
-            ];
-
+                { top: 45, left: 18 },  // top left of cake
+                { top: 45, left: 72 },  // top right of cake
+                { top: 56, left: 10 },  // middle left
+                { top: 56, left: 82 },  // middle right
+                { top: 68, left: 18 },  // bottom left
+                { top: 68, left: 72 },  // bottom right
+                { top: 50, left: 28 },  // near cake left
+                { top: 50, left: 62 }   // near cake right
+            ]; 
             assets.forEach((el, index) => {
                 if(positions[index]) {
                     el.style.top = positions[index].top + '%';
