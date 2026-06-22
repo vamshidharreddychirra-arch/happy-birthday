@@ -412,7 +412,7 @@
             <div class="cake-box" onclick="triggerCakeBlow()">
                 <img id="cake-image-state" src="cake with candles.png" alt="Lit Birthday Cake">
             </div>
-            <p class="blow-instruction" id="blow-hint">💨 Tap the candles to blow them out!</p>
+            <p class="blow-instruction" id="blow-hint">Make a Wish 🌟 and Tap the candles!💨</p>
         </div>
 
         <div id="message-screen" class="screen">
@@ -514,7 +514,6 @@
             });
 
             burstConfetti();
-            setTimeout(burstConfetti, 250);
             
             setTimeout(() => {
                 document.getElementById('cake-screen').style.display = 'none';
