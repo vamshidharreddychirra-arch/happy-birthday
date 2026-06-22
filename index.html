@@ -86,26 +86,19 @@
             margin: 15px 0;
         }
 
-         .side-emoji {
+        .side-emoji {
             font-size: 2rem;
             user-select: none;
             pointer-events: none;
         }
 
-        .left-emoji {
-            animation: floatLeftEmoji 1.5s infinite ease-in-out alternate;
-        }
-
-        .right-emoji {
-            animation: floatRightEmoji 1.5s infinite ease-in-out alternate;
-            animation-delay: 0.3s;
-        }
+        .left-emoji { animation: floatLeftEmoji 1.5s infinite ease-in-out alternate; }
+        .right-emoji { animation: floatRightEmoji 1.5s infinite ease-in-out alternate; animation-delay: 0.3s; }
 
         @keyframes floatLeftEmoji {
             0% { transform: translateY(0) rotate(-10deg) scale(1); }
             100% { transform: translateY(-10px) rotate(5deg) scale(0.5); }
         }
-
         @keyframes floatRightEmoji {
             0% { transform: translateY(0) rotate(10deg) scale(1); }
             100% { transform: translateY(-10px) rotate(-5deg) scale(0.5); }
@@ -181,10 +174,92 @@
         }
 
         /* --- SCREEN 3: CAKE TRANSITION PLAYER --- */
+        #cake-screen {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        /* Custom Happy Birthday Image Asset Styling */
+        .birthday-banner-img {
+            position: absolute;
+            top: 1%;
+            width: 350px;
+            max-width: 85vw;
+            height: auto;
+            object-fit: contain;
+            z-index: 20;
+            filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.1));
+        }
+
+        /* --- ROYAL IMAGE-BASED TRANSITION CURTAINS --- */
+        .curtain-stage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 40;
+        }
+
+        /* Full Closed Initial Overlay */
+        .closed-curtain-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            z-index: 43;
+            opacity: 1;
+        }
+
+        /* Moving Split Components Container */
+        .split-curtains-stage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            z-index: 41;
+        }
+
+        .side-curtain-image {
+            width: 50%;
+            height: 100%;
+            object-fit: fill;
+            transition: transform 15s cubic-bezier(0.16, 1, 0.3, 1); /* Slow majestic dispersal */
+        }
+
+        .left-curtain-asset {
+            transform-origin: left center;
+        }
+
+        .right-curtain-asset {
+            transform-origin: right center;
+        }
+
+        /* OPEN ACTIVATION: Immediate display toggle on overlay ensures an absolute tight gap handoff */
+        .curtain-stage.open .closed-curtain-overlay {
+            opacity: 0;
+        }
+        .curtain-stage.open .left-curtain-asset {
+            transform: translateX(-76%) scaleX(0.75);
+        }
+        .curtain-stage.open .right-curtain-asset {
+            transform: translateX(76%) scaleX(0.75);
+        }
+
+        /* Cake Box layout setup */
         .cake-box {
-            width: 220px;
-            height: 220px;
+            width: 286px;
+            height: 286px;
             cursor: pointer;
+            z-index: 15;
+            margin-top: 100px;
             transition: transform 0.2s ease;
         }
         .cake-box:active { transform: scale(0.95); }
@@ -199,33 +274,48 @@
             font-weight: bold;
             margin-top: 20px;
             letter-spacing: 0.3px;
+            z-index: 15;
+        }
+
+        /* Scattered celebration assets */
+        .party-asset {
+            position: absolute;
+            font-size: 3.5rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: 12;
+            display: none; 
+        }
+
+        /* Dance routines */
+        .dance-fast { animation: partyDance 0.6s infinite ease-in-out alternate; }
+        .dance-slow { animation: partyDance 0.9s infinite ease-in-out alternate-reverse; }
+        .dance-sway { animation: partySway 0.8s infinite ease-in-out alternate; }
+
+        @keyframes partyDance {
+            0% { transform: translateY(0) rotate(-15deg) scale(0.95); }
+            100% { transform: translateY(-25px) rotate(15deg) scale(1.1); }
+        }
+
+        @keyframes partySway {
+            0% { transform: translateX(-15px) rotate(-12deg); }
+            100% { transform: translateX(15px) rotate(12deg) translateY(-15px); }
         }
 
         /* --- SCREEN 4: ROYAL MESSAGE CONTAINER --- */
         .royal-card {
             width: 100%;
-            /* Widened the card base bounding box slightly to accommodate transparent wings of the PNG */
             max-width: 440px; 
-            background-image: url('scroll.png');
+            background-image: url('image_07da7c.png'); /* Swapped with your updated decoration asset filename */
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            
-            /* Tighter internal side padding dynamically keeps the text away from scroll margins */
             padding: 110px 75px 95px 75px; 
             cursor: pointer;
             transition: transform 0.2s ease;
         }
         .royal-card:active { transform: scale(0.98); }
         
-        .royal-card h2 {
-            font-family: 'Georgia', serif;
-            color: #9d174d;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed #b45309;
-            padding-bottom: 6px;
-        }
         .royal-card p {
             font-family: 'Georgia', serif;
             color: #450a0a;
@@ -298,6 +388,25 @@
         </div>
 
         <div id="cake-screen" class="screen">
+            <div class="curtain-stage" id="stage-curtains">
+                <img src="curtain_3_closed.png" class="closed-curtain-overlay" id="closed-overlay-img" alt="">
+                <div class="split-curtains-stage">
+                    <img src="curtain_1_left.png" class="side-curtain-image left-curtain-asset" alt="">
+                    <img src="curtain_2_right.png" class="side-curtain-image right-curtain-asset" alt="">
+                </div>
+            </div>
+
+            <img src="Happy birthday.png" class="birthday-banner-img" alt="Happy Birthday Banner">
+
+            <div class="party-asset dance-fast">🎉</div>
+            <div class="party-asset dance-fast">🎉</div>
+            <div class="party-asset dance-sway">🍾</div>
+            <div class="party-asset dance-sway">🍾</div>
+            <div class="party-asset dance-slow">🧸</div>
+            <div class="party-asset dance-slow">🧸</div>
+            <div class="party-asset dance-fast">🎸</div>
+            <div class="party-asset dance-fast">🎸</div>
+
             <div class="cake-box" onclick="triggerCakeBlow()">
                 <img id="cake-image-state" src="cake with candles.png" alt="Lit Birthday Cake">
             </div>
@@ -358,6 +467,19 @@
         videoElement.onended = function() {
             document.getElementById('video-screen').style.display = 'none';
             document.getElementById('cake-screen').style.display = 'flex';
+            
+            // Execute seamless full-to-split image curtain transition logic
+            setTimeout(() => {
+                const stage = document.getElementById('stage-curtains');
+                
+                // CRITICAL FIX: Swap closed full overlay image block instantly to avoid shutter effect
+                const overlayImg = document.getElementById('closed-overlay-img');
+                if (overlayImg) overlayImg.style.display = 'none';
+                
+                // Fire CSS sliding animation which now lasts for 15 majestic seconds
+                stage.classList.add('open');
+            }, 150);
+            
             burstConfetti();
         };
 
@@ -367,11 +489,34 @@
 
             cakeImage.src = 'cake without candles.png';
             blowHint.innerHTML = "✨ Your wish is cast! ✨";
+
+            // Symmetrical grid setup completely clear of the central cake zone
+            const assets = document.querySelectorAll('.party-asset');
+            const positions = [
+                { top: 22, left: 14 },  // Top Left
+                { top: 22, left: 76 },  // Top Right
+                { top: 48, left: 12 },  // Mid Left
+                { top: 48, left: 78 },  // Mid Right
+                { top: 74, left: 14 },  // Bottom Left
+                { top: 74, left: 76 },  // Bottom Right
+                { top: 35, left: 16 },  // Inner Left
+                { top: 35, left: 74 }   // Inner Right
+            ];
+
+            assets.forEach((el, index) => {
+                if(positions[index]) {
+                    el.style.top = positions[index].top + '%';
+                    el.style.left = positions[index].left + '%';
+                    el.style.display = 'block';
+                }
+            });
+
+            burstConfetti();
             
             setTimeout(() => {
                 document.getElementById('cake-screen').style.display = 'none';
                 document.getElementById('message-screen').style.display = 'flex';
-            }, 1100);
+            }, 5000);
         }
 
         function revealFinalPhoto() {
