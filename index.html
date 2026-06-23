@@ -10,13 +10,17 @@
     <meta property="og:image" content="giftbox.png" />
     <meta property="og:type" content="website" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
             background: linear-gradient(45deg, #ffebec 0%, #ffe4e6 25%, #f5d0fe 50%, #fef08a 75%, #fce7f3 100%) !important;
             background-size: 200% 200%;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,7 +33,7 @@
         .container {
             width: 100%;
             max-width: 420px;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             z-index: 10;
             display: flex;
@@ -39,7 +43,6 @@
             position: relative;
         }
 
-        /* Hidden by default, unmasked step by step */
         .screen {
             display: none;
             flex-direction: column;
@@ -49,7 +52,7 @@
         }
 
         @keyframes screenFadeIn {
-            from { opacity: 0; transform: translateY(15px) scale(0.97); }
+            from { opacity: 0; transform: translateY(10px) scale(0.98); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
@@ -58,24 +61,25 @@
 
         h1 {
             color: #ec4899;
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             line-height: 1.2;
             margin-bottom: 10px;
             font-weight: 800;
+            font-family: 'Playfair Display', serif;
             animation: textGlow 2.5s infinite ease-in-out;
         }
         h1 span { color: #d97706; }
 
         @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 12px rgba(236,72,153,0.3); transform: scale(1); }
-            50% { text-shadow: 0 0 25px rgba(236,72,153,0.6); transform: scale(1.02); }
+            0%, 100% { text-shadow: 0 0 12px rgba(236,72,153,0.2); transform: scale(1); }
+            50% { text-shadow: 0 0 20px rgba(236,72,153,0.4); transform: scale(1.01); }
         }
 
         .subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #be185d;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .gift-row-container {
@@ -86,28 +90,23 @@
             margin: 15px 0;
         }
 
-        .side-emoji {
-            font-size: 2rem;
-            user-select: none;
-            pointer-events: none;
-        }
-
+        .side-emoji { font-size: 2rem; user-select: none; pointer-events: none; }
         .left-emoji { animation: floatLeftEmoji 1.5s infinite ease-in-out alternate; }
         .right-emoji { animation: floatRightEmoji 1.5s infinite ease-in-out alternate; animation-delay: 0.3s; }
 
         @keyframes floatLeftEmoji {
-            0% { transform: translateY(0) rotate(-10deg) scale(1); }
-            100% { transform: translateY(-10px) rotate(5deg) scale(0.5); }
+            0% { transform: translateY(0) rotate(-10deg); }
+            100% { transform: translateY(-8px) rotate(5deg); }
         }
         @keyframes floatRightEmoji {
-            0% { transform: translateY(0) rotate(10deg) scale(1); }
-            100% { transform: translateY(-10px) rotate(-5deg) scale(0.5); }
+            0% { transform: translateY(0) rotate(10deg); }
+            100% { transform: translateY(-8px) rotate(-5deg); }
         }
 
         .gift-wrapper {
             position: relative;
-            width: 170px;
-            height: 170px;
+            width: 150px;
+            height: 150px;
             cursor: pointer;
             animation: dynamicBox 1.2s infinite ease-in-out;
         }
@@ -115,15 +114,15 @@
 
         @keyframes dynamicBox {
             0%, 100% { transform: translateY(0) scale(1); }
-            20% { transform: translateY(-12px) scale(1.05); }
-            40% { transform: translateY(0) scale(0.95); }
+            20% { transform: translateY(-10px) scale(1.04); }
+            40% { transform: translateY(0) scale(0.96); }
         }
 
-        .tap-prompt { margin-top: 35px; font-size: 1rem; color: #ea580c; font-weight: bold; }
-
+        .tap-prompt { margin-top: 25px; font-size: 0.95rem; color: #ea580c; font-weight: bold; }
         .pop-effect { animation: giftPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards !important; }
+        
         @keyframes giftPop {
-            50% { transform: scale(1.3); }
+            50% { transform: scale(1.25); }
             100% { transform: scale(0); opacity: 0; }
         }
 
@@ -153,27 +152,22 @@
         #decor-4 { bottom: 5%; right: 4%; width: 80px; animation-delay: 2.2s; }
         
         @keyframes floatUpDown {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-12px) scale(1.03); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        /* --- SCREEN 2: INTEGRATED PRODUCTION VIDEO PLAYER --- */
+        /* --- SCREEN 2: VIDEO PLAYER --- */
         .video-wrapper {
             width: 100%;
             aspect-ratio: 4 / 5;
             background: transparent;
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
         }
-        .video-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            background: transparent;
-        }
+        .video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- SCREEN 3: CAKE TRANSITION PLAYER --- */
+        /* --- SCREEN 3: CAKE TRANSITION --- */
         #cake-screen {
             position: relative;
             width: 100vw;
@@ -181,19 +175,16 @@
             justify-content: center;
         }
 
-        /* Custom Happy Birthday Image Asset Styling */
         .birthday-banner-img {
             position: absolute;
-            top: 1%;
-            width: 350px;
+            top: 2%;
+            width: 320px;
             max-width: 85vw;
             height: auto;
             object-fit: contain;
             z-index: 20;
-            filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.1));
         }
 
-        /* --- ROYAL IMAGE-BASED TRANSITION CURTAINS --- */
         .curtain-stage {
             position: absolute;
             top: 0;
@@ -204,7 +195,6 @@
             z-index: 40;
         }
 
-        /* Full Closed Initial Overlay */
         .closed-curtain-overlay {
             position: absolute;
             top: 0;
@@ -214,10 +204,9 @@
             object-fit: fill;
             z-index: 43;
             opacity: 1;
-            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: opacity 0.4s ease;
         }
 
-        /* Moving Split Components Container */
         .split-curtains-stage {
             position: absolute;
             top: 0;
@@ -232,123 +221,181 @@
             width: 50%;
             height: 100%;
             object-fit: fill;
-            /* SLOW MAJESTIC SYNCHRONIZED DISPERSAL TIMING */
-            transition: transform 15s cubic-bezier(0.16, 1, 0.3, 1); 
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); 
         }
 
-        .left-curtain-asset {
-            transform-origin: left center;
-        }
+        .curtain-stage.open .closed-curtain-overlay { opacity: 0; }
+        .curtain-stage.open .left-curtain-asset { transform: translateX(-100%); }
+        .curtain-stage.open .right-curtain-asset { transform: translateX(100%); }
 
-        .right-curtain-asset {
-            transform-origin: right center;
-        }
-
-        /* OPEN ACTIVATION: Symmetrical slow dispersal ensuring both finish exactly together */
-        .curtain-stage.open .closed-curtain-overlay {
-            opacity: 0;
-        }
-        .curtain-stage.open .left-curtain-asset {
-            transform: translateX(-76%) scaleX(0.75);
-        }
-        .curtain-stage.open .right-curtain-asset {
-            transform: translateX(76%) scaleX(0.75);
-        }
-
-        /* Cake Box layout setup */
         .cake-box {
-            width: 286px;
-            height: 286px;
+            width: 240px;
+            height: 240px;
             cursor: pointer;
             z-index: 15;
-            margin-top: 100px;
-            transition: transform 0.2s ease;
+            margin-top: 80px;
         }
-        .cake-box:active { transform: scale(0.95); }
-        .cake-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+        .cake-box img { width: 100%; height: 100%; object-fit: contain; }
+        
         .blow-instruction {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #be185d;
             font-weight: bold;
-            margin-top: 20px;
-            letter-spacing: 0.3px;
+            margin-top: 15px;
             z-index: 15;
         }
 
-        /* Scattered celebration assets */
-        .party-asset {
-            position: absolute;
-            font-size: 2rem;
-            user-select: none;
-            pointer-events: none;
-            z-index: 12;
-            display: none; 
-        }
-
-        /* Dance routines */
+        .party-asset { position: absolute; font-size: 1.8rem; user-select: none; pointer-events: none; z-index: 12; display: none; }
         .dance-fast { animation: partyDance 0.6s infinite ease-in-out alternate; }
-        .dance-slow { animation: partyDance 0.9s infinite ease-in-out alternate-reverse; }
         .dance-sway { animation: partySway 0.8s infinite ease-in-out alternate; }
 
         @keyframes partyDance {
-            0% { transform: translateY(0) rotate(-15deg) scale(0.95); }
-            100% { transform: translateY(-25px) rotate(15deg) scale(1.1); }
+            0% { transform: translateY(0) rotate(-10deg); }
+            100% { transform: translateY(-15px) rotate(10deg); }
         }
-
         @keyframes partySway {
-            0% { transform: translateX(-15px) rotate(-12deg); }
-            100% { transform: translateX(15px) rotate(12deg) translateY(-15px); }
+            0% { transform: translateX(-10px); }
+            100% { transform: translateX(10px) translateY(-10px); }
         }
 
-        /* --- SCREEN 4: ROYAL MESSAGE CONTAINER --- */
+        /* --- SCREEN 4: POSTER MESSAGE --- */
         .royal-card {
             width: 100%;
-            max-width: 440px; 
             cursor: pointer;
-            transition: transform 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .royal-card:active { transform: scale(0.98); }
-        
         .royal-poster-img {
             width: 100%;
             height: auto;
+            max-height: 70vh;
             object-fit: contain;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
-
         .hint-click {
-            margin-top: 15px;
+            margin-top: 12px;
             font-size: 0.8rem;
             color: #b45309;
             font-weight: 800;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* --- SCREEN 5: FINAL MEMORY FRAME --- */
-        .together-photo-frame {
+        /* --- SCREEN 5: FINALE FINISHED INFINITY WALL --- */
+        #photo-screen {
+            background: #000000 !important; /* Pure black transparent background look */
+            border-radius: 20px;
+            padding: 20px 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            color: #ffffff;
             width: 100%;
-            aspect-ratio: 1.1 / 1;
-            background: white;
-            border-radius: 24px;
-            padding: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            max-height: 92vh; /* Explicit constraint to eliminate vertical scrolling */
+            justify-content: space-between;
         }
-        .together-photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 16px;
+
+        .wall-title {
+            font-family: 'Great Vibes', cursive;
+            color: #fda4af;
+            font-size: 2.6rem;
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 2px;
+            text-shadow: 0 0 10px rgba(244,63,94,0.4);
         }
         
+        .wall-subtitle {
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        /* Compact Non-Scrolling Infinity Grid Layout */
+        .infinity-wall-grid {
+            position: relative;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 8px;
+            column-gap: 12px;
+            padding: 0 5px;
+        }
+
+        .wall-polaroid {
+            background: #ffffff;
+            padding: 6px 6px 12px 6px;
+            border-radius: 2px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .wall-polaroid img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        .wall-polaroid .caption {
+            font-family: 'Playfair Display', serif;
+            color: #1e1b4b;
+            font-size: 0.65rem;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* Custom coordinates fitting all 5 photos symmetrically inside the max viewport height */
+        .p-top-left { transform: rotate(-4deg) scale(0.95); }
+        .p-top-right { transform: rotate(4deg) scale(0.95); }
+        .p-mid-center { grid-column: span 2; justify-self: center; width: 52%; transform: rotate(-1deg) translateY(-4px); z-index: 5; }
+        .p-bot-left { transform: rotate(3deg) translateY(-8px) scale(0.95); }
+        .p-bot-right { transform: rotate(-3deg) translateY(-8px) scale(0.95); }
+
+        .wall-message-block {
+            margin: 5px 0 12px 0;
+            padding: 0 5px;
+        }
+
+        .wall-message-block h3 {
+            font-family: 'Great Vibes', cursive;
+            color: #f43f5e;
+            font-size: 2.2rem;
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .wall-message-block p {
+            font-family: 'Playfair Display', serif;
+            color: #f1f5f9;
+            font-size: 0.9rem;
+            font-style: italic;
+            line-height: 1.3;
+        }
+
+        .replay-btn {
+            background: transparent;
+            color: #fda4af;
+            border: 1px solid #f43f5e;
+            padding: 8px 24px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s ease;
+            margin-top: auto;
+        }
+        .replay-btn:active { background: rgba(244, 63, 94, 0.15); }
+
         #confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
     </style>
 </head>
@@ -380,7 +427,7 @@
 
         <div id="video-screen" class="screen">
             <div class="video-wrapper">
-                <video id="main-birthday-video" autoplay muted playsinline controls preload="auto">
+                <video id="main-birthday-video" muted playsinline controls preload="auto">
                     <source src="lohithaVideo.mp4" type="video/mp4">
                 </video>
             </div>
@@ -395,16 +442,16 @@
                 </div>
             </div>
 
-            <img src="Happy birthday.png" class="birthday-banner-img" alt="Happy Birthday Banner">
+            <img src="Happy birthday.png" class="birthday-banner-img" alt="Happy Birthday">
 
             <div class="party-asset dance-fast">🎉</div>
             <div class="party-asset dance-fast">🎉</div>
             <div class="party-asset dance-sway">🍾</div>
             <div class="party-asset dance-sway">🍾</div>
-            <div class="party-asset dance-slow">🧸</div>
-            <div class="party-asset dance-slow">🧸</div>
-            <div class="party-asset dance-fast">🎸</div>
-            <div class="party-asset dance-fast">🎸</div>
+            <div class="party-asset dance-fast">🧸</div>
+            <div class="party-asset dance-fast">🧸</div>
+            <div class="party-asset dance-sway">🎸</div>
+            <div class="party-asset dance-sway">🎸</div>
 
             <div class="cake-box" onclick="triggerCakeBlow()">
                 <img id="cake-image-state" src="cake with candles.png" alt="Lit Birthday Cake">
@@ -420,8 +467,43 @@
         </div>
 
         <div id="photo-screen" class="screen">
-            <div class="together-photo-frame">
-                <img src="our-photo.jpg" alt="Us Together ❤️">
+            <div>
+                <h2 class="wall-title">Memories Forever</h2>
+                <p class="wall-subtitle">Some moments become memories, and these memories last forever.</p>
+            </div>
+
+            <div class="infinity-wall-grid">
+                <div class="wall-polaroid p-top-left">
+                    <img src="together1.jpeg" alt="Good Times">
+                    <div class="caption">Good times</div>
+                </div>
+                <div class="wall-polaroid p-top-right">
+                    <img src="together2.jpeg" alt="Laughter">
+                    <div class="caption">Laughter</div>
+                </div>
+                <div class="wall-polaroid p-mid-center">
+                    <img src="together3.jpeg" alt="Unforgettable">
+                    <div class="caption">Unforgettable</div>
+                </div>
+                <div class="wall-polaroid p-bot-left">
+                    <img src="together4.jpeg" alt="Adventures">
+                    <div class="caption">Adventures</div>
+                </div>
+                <div class="wall-polaroid p-bot-right">
+                    <img src="together5.jpeg" alt="Us">
+                    <div class="caption">Us</div>
+                </div>
+            </div>
+
+            <div class="wall-message-block">
+                <h3>Happy birthday ❤️</h3>
+                <p>Thank you for being part of my story, but the story isn't finished yet.</p>
+            </div>
+
+            <div>
+                <button class="replay-btn" onclick="replayJourney()">
+                    <span>🔄</span> Replay Journey
+                </button>
             </div>
         </div>
 
@@ -430,20 +512,14 @@
     <script>
         const videoElement = document.getElementById('main-birthday-video');
 
-        videoElement.addEventListener('error', function(e) {
-            console.error("Video element errored out:", videoElement.error);
-        }, true);
-
         function openSurprise() {
             const giftWrapper = document.querySelector('.gift-wrapper');
-
             giftWrapper.classList.add('pop-effect');
             burstConfetti();
 
             setTimeout(() => {
                 document.getElementById('gift-screen').style.display = 'none';
                 document.getElementById('first-screen-decorations').style.display = 'none';
-                
                 document.getElementById('video-screen').style.display = 'flex';
                 
                 videoElement.load();
@@ -455,7 +531,6 @@
                     playPromise.then(() => {
                         setTimeout(() => { videoElement.muted = false; }, 150);
                     }).catch(err => {
-                        console.warn("Autoplay blocked. Keeping video muted to force stream.", err);
                         videoElement.muted = true;
                         videoElement.play();
                     });
@@ -467,15 +542,10 @@
             document.getElementById('video-screen').style.display = 'none';
             document.getElementById('cake-screen').style.display = 'flex';
             
-            // Initiate synchronized frame-accurate curtain split transition
             setTimeout(() => {
                 const stage = document.getElementById('stage-curtains');
-                
-                // Hide closed full overlay block instantly so split components take over symmetrically
                 const overlayImg = document.getElementById('closed-overlay-img');
                 if (overlayImg) overlayImg.style.display = 'none';
-                
-                // Engage majestic 15-second opening slide for BOTH sides simultaneously
                 stage.classList.add('open');
             }, 150);
             
@@ -489,17 +559,12 @@
             cakeImage.src = 'cake without candles.png';
             blowHint.innerHTML = "✨ Your wish is cast! ✨";
 
-            // Symmetrical positioning grid avoiding the center cake region completely
             const assets = document.querySelectorAll('.party-asset');
             const positions = [
-                { top: 45, left: 21 },  // top left of cake
-                { top: 45, left: 75 },  // top right of cake
-                { top: 56, left: 13 },  // middle left
-                { top: 56, left: 85 },  // middle right
-                { top: 68, left: 21 },  // bottom left
-                { top: 68, left: 75 },  // bottom right
-                { top: 50, left: 31 },  // near cake left
-                { top: 50, left: 65 }   // near cake right
+                { top: 42, left: 18 }, { top: 42, left: 78 }, 
+                { top: 54, left: 10 }, { top: 54, left: 88 }, 
+                { top: 65, left: 18 }, { top: 65, left: 78 }, 
+                { top: 48, left: 28 }, { top: 48, left: 68 }
             ]; 
             assets.forEach((el, index) => {
                 if(positions[index]) {
@@ -514,13 +579,32 @@
             setTimeout(() => {
                 document.getElementById('cake-screen').style.display = 'none';
                 document.getElementById('message-screen').style.display = 'flex';
-            }, 3500);
+            }, 3000);
         }
 
         function revealFinalPhoto() {
             document.getElementById('message-screen').style.display = 'none';
             document.getElementById('photo-screen').style.display = 'flex';
-            
+            burstConfetti();
+        }
+
+        function replayJourney() {
+            document.getElementById('photo-screen').style.display = 'none';
+            document.getElementById('gift-screen').style.display = 'flex';
+            document.getElementById('first-screen-decorations').style.display = 'block';
+
+            const giftWrapper = document.querySelector('.gift-wrapper');
+            giftWrapper.classList.remove('pop-effect');
+
+            const stage = document.getElementById('stage-curtains');
+            const overlayImg = document.getElementById('closed-overlay-img');
+            stage.classList.remove('open');
+            if (overlayImg) overlayImg.style.display = 'block';
+
+            document.getElementById('cake-image-state').src = 'cake with candles.png';
+            document.getElementById('blow-hint').innerHTML = "Make a Wish 🌟 and Tap the candles!💨";
+            document.querySelectorAll('.party-asset').forEach(el => el.style.display = 'none');
+
             burstConfetti();
         }
 
@@ -533,15 +617,15 @@
             let particles = [];
             const hues = ['#ec4899', '#f43f5e', '#e11d48', '#fbbf24', '#38bdf8'];
 
-            for (let i = 0; i < 120; i++) {
+            for (let i = 0; i < 100; i++) {
                 particles.push({
                     x: canvas.width / 2,
                     y: canvas.height / 2,
-                    size: Math.random() * 6 + 4,
+                    size: Math.random() * 5 + 3,
                     color: hues[Math.floor(Math.random() * hues.length)],
-                    speedX: (Math.random() - 0.5) * 12,
-                    speedY: (Math.random() - 0.7) * 15,
-                    gravity: 0.35
+                    speedX: (Math.random() - 0.5) * 10,
+                    speedY: (Math.random() - 0.7) * 13,
+                    gravity: 0.3
                 });
             }
 
