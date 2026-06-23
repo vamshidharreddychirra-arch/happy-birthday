@@ -10,17 +10,13 @@
     <meta property="og:image" content="giftbox.png" />
     <meta property="og:type" content="website" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
             background: linear-gradient(45deg, #ffebec 0%, #ffe4e6 25%, #f5d0fe 50%, #fef08a 75%, #fce7f3 100%) !important;
             background-size: 200% 200%;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -33,7 +29,7 @@
         .container {
             width: 100%;
             max-width: 420px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             z-index: 10;
             display: flex;
@@ -43,6 +39,7 @@
             position: relative;
         }
 
+        /* Hidden by default, unmasked step by step */
         .screen {
             display: none;
             flex-direction: column;
@@ -52,7 +49,7 @@
         }
 
         @keyframes screenFadeIn {
-            from { opacity: 0; transform: translateY(10px) scale(0.98); }
+            from { opacity: 0; transform: translateY(15px) scale(0.97); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
@@ -61,25 +58,24 @@
 
         h1 {
             color: #ec4899;
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             line-height: 1.2;
             margin-bottom: 10px;
             font-weight: 800;
-            font-family: 'Playfair Display', serif;
             animation: textGlow 2.5s infinite ease-in-out;
         }
         h1 span { color: #d97706; }
 
         @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 12px rgba(236,72,153,0.2); transform: scale(1); }
-            50% { text-shadow: 0 0 20px rgba(236,72,153,0.4); transform: scale(1.01); }
+            0%, 100% { text-shadow: 0 0 12px rgba(236,72,153,0.3); transform: scale(1); }
+            50% { text-shadow: 0 0 25px rgba(236,72,153,0.6); transform: scale(1.02); }
         }
 
         .subtitle {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #be185d;
             font-weight: 600;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .gift-row-container {
@@ -90,23 +86,28 @@
             margin: 15px 0;
         }
 
-        .side-emoji { font-size: 2rem; user-select: none; pointer-events: none; }
+        .side-emoji {
+            font-size: 2rem;
+            user-select: none;
+            pointer-events: none;
+        }
+
         .left-emoji { animation: floatLeftEmoji 1.5s infinite ease-in-out alternate; }
         .right-emoji { animation: floatRightEmoji 1.5s infinite ease-in-out alternate; animation-delay: 0.3s; }
 
         @keyframes floatLeftEmoji {
-            0% { transform: translateY(0) rotate(-10deg); }
-            100% { transform: translateY(-8px) rotate(5deg); }
+            0% { transform: translateY(0) rotate(-10deg) scale(1); }
+            100% { transform: translateY(-10px) rotate(5deg) scale(0.5); }
         }
         @keyframes floatRightEmoji {
-            0% { transform: translateY(0) rotate(10deg); }
-            100% { transform: translateY(-8px) rotate(-5deg); }
+            0% { transform: translateY(0) rotate(10deg) scale(1); }
+            100% { transform: translateY(-10px) rotate(-5deg) scale(0.5); }
         }
 
         .gift-wrapper {
             position: relative;
-            width: 150px;
-            height: 150px;
+            width: 170px;
+            height: 170px;
             cursor: pointer;
             animation: dynamicBox 1.2s infinite ease-in-out;
         }
@@ -114,15 +115,15 @@
 
         @keyframes dynamicBox {
             0%, 100% { transform: translateY(0) scale(1); }
-            20% { transform: translateY(-10px) scale(1.04); }
-            40% { transform: translateY(0) scale(0.96); }
+            20% { transform: translateY(-12px) scale(1.05); }
+            40% { transform: translateY(0) scale(0.95); }
         }
 
-        .tap-prompt { margin-top: 25px; font-size: 0.95rem; color: #ea580c; font-weight: bold; }
+        .tap-prompt { margin-top: 35px; font-size: 1rem; color: #ea580c; font-weight: bold; }
+
         .pop-effect { animation: giftPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards !important; }
-        
         @keyframes giftPop {
-            50% { transform: scale(1.25); }
+            50% { transform: scale(1.3); }
             100% { transform: scale(0); opacity: 0; }
         }
 
@@ -152,22 +153,27 @@
         #decor-4 { bottom: 5%; right: 4%; width: 80px; animation-delay: 2.2s; }
         
         @keyframes floatUpDown {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.03); }
         }
 
-        /* --- SCREEN 2: VIDEO PLAYER --- */
+        /* --- SCREEN 2: INTEGRATED PRODUCTION VIDEO PLAYER --- */
         .video-wrapper {
             width: 100%;
             aspect-ratio: 4 / 5;
             background: transparent;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
         }
-        .video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            background: transparent;
+        }
 
-        /* --- SCREEN 3: CAKE TRANSITION --- */
+        /* --- SCREEN 3: CAKE TRANSITION PLAYER --- */
         #cake-screen {
             position: relative;
             width: 100vw;
@@ -175,16 +181,19 @@
             justify-content: center;
         }
 
+        /* Custom Happy Birthday Image Asset Styling */
         .birthday-banner-img {
             position: absolute;
-            top: 2%;
-            width: 320px;
+            top: 1%;
+            width: 350px;
             max-width: 85vw;
             height: auto;
             object-fit: contain;
             z-index: 20;
+            filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.1));
         }
 
+        /* --- ROYAL IMAGE-BASED TRANSITION CURTAINS --- */
         .curtain-stage {
             position: absolute;
             top: 0;
@@ -195,6 +204,7 @@
             z-index: 40;
         }
 
+        /* Full Closed Initial Overlay */
         .closed-curtain-overlay {
             position: absolute;
             top: 0;
@@ -204,9 +214,10 @@
             object-fit: fill;
             z-index: 43;
             opacity: 1;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
+        /* Moving Split Components Container */
         .split-curtains-stage {
             position: absolute;
             top: 0;
@@ -221,68 +232,108 @@
             width: 50%;
             height: 100%;
             object-fit: fill;
-            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); 
+            /* SLOW MAJESTIC SYNCHRONIZED DISPERSAL TIMING */
+            transition: transform 15s cubic-bezier(0.16, 1, 0.3, 1); 
         }
 
-        .curtain-stage.open .closed-curtain-overlay { opacity: 0; }
-        .curtain-stage.open .left-curtain-asset { transform: translateX(-100%); }
-        .curtain-stage.open .right-curtain-asset { transform: translateX(100%); }
+        .left-curtain-asset {
+            transform-origin: left center;
+        }
 
+        .right-curtain-asset {
+            transform-origin: right center;
+        }
+
+        /* OPEN ACTIVATION: Symmetrical slow dispersal ensuring both finish exactly together */
+        .curtain-stage.open .closed-curtain-overlay {
+            opacity: 0;
+        }
+        .curtain-stage.open .left-curtain-asset {
+            transform: translateX(-76%) scaleX(0.75);
+        }
+        .curtain-stage.open .right-curtain-asset {
+            transform: translateX(76%) scaleX(0.75);
+        }
+
+        /* Cake Box layout setup */
         .cake-box {
-            width: 240px;
-            height: 240px;
+            width: 286px;
+            height: 286px;
             cursor: pointer;
             z-index: 15;
-            margin-top: 80px;
+            margin-top: 100px;
+            transition: transform 0.2s ease;
         }
-        .cake-box img { width: 100%; height: 100%; object-fit: contain; }
-        
+        .cake-box:active { transform: scale(0.95); }
+        .cake-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
         .blow-instruction {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #be185d;
             font-weight: bold;
-            margin-top: 15px;
+            margin-top: 20px;
+            letter-spacing: 0.3px;
             z-index: 15;
         }
 
-        .party-asset { position: absolute; font-size: 1.8rem; user-select: none; pointer-events: none; z-index: 12; display: none; }
+        /* Scattered celebration assets */
+        .party-asset {
+            position: absolute;
+            font-size: 2rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: 12;
+            display: none; 
+        }
+
+        /* Dance routines */
         .dance-fast { animation: partyDance 0.6s infinite ease-in-out alternate; }
+        .dance-slow { animation: partyDance 0.9s infinite ease-in-out alternate-reverse; }
         .dance-sway { animation: partySway 0.8s infinite ease-in-out alternate; }
 
         @keyframes partyDance {
-            0% { transform: translateY(0) rotate(-10deg); }
-            100% { transform: translateY(-15px) rotate(10deg); }
-        }
-        @keyframes partySway {
-            0% { transform: translateX(-10px); }
-            100% { transform: translateX(10px) translateY(-10px); }
+            0% { transform: translateY(0) rotate(-15deg) scale(0.95); }
+            100% { transform: translateY(-25px) rotate(15deg) scale(1.1); }
         }
 
-        /* --- SCREEN 4: POSTER MESSAGE --- */
+        @keyframes partySway {
+            0% { transform: translateX(-15px) rotate(-12deg); }
+            100% { transform: translateX(15px) rotate(12deg) translateY(-15px); }
+        }
+
+        /* --- SCREEN 4: ROYAL MESSAGE CONTAINER --- */
         .royal-card {
             width: 100%;
+            max-width: 440px; 
             cursor: pointer;
+            transition: transform 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+        .royal-card:active { transform: scale(0.98); }
+        
         .royal-poster-img {
             width: 100%;
             height: auto;
-            max-height: 70vh;
             object-fit: contain;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
+
         .hint-click {
-            margin-top: 12px;
+            margin-top: 15px;
             font-size: 0.8rem;
             color: #b45309;
             font-weight: 800;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* --- SCREEN 5: FINALE FINISHED INFINITY WALL (MICRO-SCALED TO 100% VIEWPORT COMPATIBLE) --- */
+        /* --- SCREEN 5: FINAL MEMORY FRAME --- */
         #photo-screen {
             background: #000000 !important;
             border-radius: 20px;
@@ -395,8 +446,8 @@
             margin-top: auto;
         }
         #photo-screen .replay-btn:active { background: rgba(244, 63, 94, 0.15); }
-
-        document.getElementById('confetti') { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+        
+        #confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
     </style>
 </head>
 <body>
@@ -413,7 +464,7 @@
     <div class="container">
         
         <div id="gift-screen" class="screen">
-            <h1>Happy Birthday,<br><span>Friend!</span> 🥰✨</h1>
+            <h1>Happy Birthday,<br><span>Vamshi!</span> 🥰✨</h1>
             <p class="subtitle">I made a little something for you. ❤️</p>
             <div class="gift-row-container">
                 <span class="side-emoji left-emoji">💖</span>
@@ -427,7 +478,7 @@
 
         <div id="video-screen" class="screen">
             <div class="video-wrapper">
-                <video id="main-birthday-video" muted playsinline controls preload="auto">
+                <video id="main-birthday-video" autoplay muted playsinline controls preload="auto">
                     <source src="lohithaVideo.mp4" type="video/mp4">
                 </video>
             </div>
@@ -442,16 +493,16 @@
                 </div>
             </div>
 
-            <img src="Happy birthday.png" class="birthday-banner-img" alt="Happy Birthday">
+            <img src="Happy birthday.png" class="birthday-banner-img" alt="Happy Birthday Banner">
 
             <div class="party-asset dance-fast">🎉</div>
             <div class="party-asset dance-fast">🎉</div>
             <div class="party-asset dance-sway">🍾</div>
             <div class="party-asset dance-sway">🍾</div>
-            <div class="party-asset dance-fast">🧸</div>
-            <div class="party-asset dance-fast">🧸</div>
-            <div class="party-asset dance-sway">🎸</div>
-            <div class="party-asset dance-sway">🎸</div>
+            <div class="party-asset dance-slow">🧸</div>
+            <div class="party-asset dance-slow">🧸</div>
+            <div class="party-asset dance-fast">🎸</div>
+            <div class="party-asset dance-fast">🎸</div>
 
             <div class="cake-box" onclick="triggerCakeBlow()">
                 <img id="cake-image-state" src="cake with candles.png" alt="Lit Birthday Cake">
@@ -512,14 +563,20 @@
     <script>
         const videoElement = document.getElementById('main-birthday-video');
 
+        videoElement.addEventListener('error', function(e) {
+            console.error("Video element errored out:", videoElement.error);
+        }, true);
+
         function openSurprise() {
             const giftWrapper = document.querySelector('.gift-wrapper');
+
             giftWrapper.classList.add('pop-effect');
             burstConfetti();
 
             setTimeout(() => {
                 document.getElementById('gift-screen').style.display = 'none';
                 document.getElementById('first-screen-decorations').style.display = 'none';
+                
                 document.getElementById('video-screen').style.display = 'flex';
                 
                 videoElement.load();
@@ -531,6 +588,7 @@
                     playPromise.then(() => {
                         setTimeout(() => { videoElement.muted = false; }, 150);
                     }).catch(err => {
+                        console.warn("Autoplay blocked. Keeping video muted to force stream.", err);
                         videoElement.muted = true;
                         videoElement.play();
                     });
@@ -542,10 +600,15 @@
             document.getElementById('video-screen').style.display = 'none';
             document.getElementById('cake-screen').style.display = 'flex';
             
+            // Initiate synchronized frame-accurate curtain split transition
             setTimeout(() => {
                 const stage = document.getElementById('stage-curtains');
+                
+                // Hide closed full overlay block instantly so split components take over symmetrically
                 const overlayImg = document.getElementById('closed-overlay-img');
                 if (overlayImg) overlayImg.style.display = 'none';
+                
+                // Engage majestic 15-second opening slide for BOTH sides simultaneously
                 stage.classList.add('open');
             }, 150);
             
@@ -559,6 +622,7 @@
             cakeImage.src = 'cake without candles.png';
             blowHint.innerHTML = "✨ Your wish is cast! ✨";
 
+            // Symmetrical positioning grid avoiding the center cake region completely
             const assets = document.querySelectorAll('.party-asset');
             const positions = [
                 { top: 42, left: 18 }, { top: 42, left: 78 }, 
@@ -579,12 +643,13 @@
             setTimeout(() => {
                 document.getElementById('cake-screen').style.display = 'none';
                 document.getElementById('message-screen').style.display = 'flex';
-            }, 3000);
+            }, 3500);
         }
 
         function revealFinalPhoto() {
             document.getElementById('message-screen').style.display = 'none';
             document.getElementById('photo-screen').style.display = 'flex';
+            
             burstConfetti();
         }
 
@@ -617,15 +682,15 @@
             let particles = [];
             const hues = ['#ec4899', '#f43f5e', '#e11d48', '#fbbf24', '#38bdf8'];
 
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 120; i++) {
                 particles.push({
                     x: canvas.width / 2,
                     y: canvas.height / 2,
-                    size: Math.random() * 5 + 3,
+                    size: Math.random() * 6 + 4,
                     color: hues[Math.floor(Math.random() * hues.length)],
-                    speedX: (Math.random() - 0.5) * 10,
-                    speedY: (Math.random() - 0.7) * 13,
-                    gravity: 0.3
+                    speedX: (Math.random() - 0.5) * 12,
+                    speedY: (Math.random() - 0.7) * 15,
+                    gravity: 0.35
                 });
             }
 
