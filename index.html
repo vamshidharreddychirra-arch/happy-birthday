@@ -308,27 +308,25 @@
         .royal-card {
             width: 100%;
             max-width: 440px; 
-            background-image: url('image_07da7c.png'); /* */
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 110px 75px 95px 75px; 
             cursor: pointer;
             transition: transform 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .royal-card:active { transform: scale(0.98); }
         
-        .royal-card p {
-            font-family: 'Georgia', serif;
-            color: #450a0a;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            font-style: italic;
-            font-weight: 600;
+        .royal-poster-img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
+
         .hint-click {
             margin-top: 15px;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: #b45309;
             font-weight: 800;
             text-transform: uppercase;
@@ -383,8 +381,7 @@
         <div id="video-screen" class="screen">
             <div class="video-wrapper">
                 <video id="main-birthday-video" autoplay muted playsinline controls preload="auto">
-                    <source src="vams.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
+                    <source src="lohithaVideo.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -417,7 +414,7 @@
 
         <div id="message-screen" class="screen">
             <div class="royal-card" onclick="revealFinalPhoto()">
-                <p>To a majestic companion, may your special day be filled with endless laughter, gold-standard memories, and the fulfillment of every heart's desire. Happy Birthday!</p>
+                <img src="birthdayPoster.png" class="royal-poster-img" alt="Birthday Message Poster">
                 <div class="hint-click">Tap message to open finale card 👉</div>
             </div>
         </div>
